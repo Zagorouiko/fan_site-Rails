@@ -23,7 +23,28 @@ describe 'the show company path' do
     fill_in 'Name', :with => 'Nintendo'
     click_on 'Create Company'
     click_on 'Nintendo'
-    click_on 'Go To Nintendo Company Page'
-    expect(page).to have_content 'Nintendo Details'
+    expect(page).to have_content 'Nintendo'
+  end
+
+  it "edits the name of a company" do
+    visit companies_path
+    click_on 'Add Company'
+    fill_in 'Name', :with => 'Sony'
+    click_on 'Create Company'
+    click_on 'Sony'
+    click_on 'Edit'
+    fill_in 'Name', :with => 'Microsoft'
+    click_on 'Update Company'
+    expect(page).to have_content 'Microsoft'
+  end
+
+  it 'deletes the name of a company' do
+    visit companies_path
+    click_on 'Add Company'
+    fill_in 'Name', :with => 'Nintendo'
+    click_on 'Create Company'
+    click_on 'Nintendo'
+    click_on "Delete"
+    expect(page).to have_content 'Companies'
   end
 end
